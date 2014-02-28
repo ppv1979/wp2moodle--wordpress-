@@ -7,7 +7,8 @@ Demo
 ----
 Go to my wordpress demo site and register yourself, then try the links.
 
-http://wordpress.frumbert.org/
+> 20140228: Sorry, the domain is down temporarily, and my host isn't replying to my tickets ... Please check back tomorrow - sorry :(
+> http://wordpress.frumbert.org/
 
 
 Activating and configuring the plugin
