@@ -29,7 +29,6 @@ License: GPL2
 
 // some definition we will use
 define( 'WP2M_PUGIN_NAME', 'Wordpress 2 Moodle (SSO)');
-define( 'WP2M_PLUGIN_DIRECTORY', 'wp2moodle');
 define( 'WP2M_CURRENT_VERSION', '1.9' );
 define( 'WP2M_CURRENT_BUILD', '1' );
 define( 'EMU2_I18N_DOMAIN', 'wp2m' );
@@ -115,10 +114,10 @@ function wp2m_create_menu() {
 	add_menu_page(
 		__('wp2Moodle', EMU2_I18N_DOMAIN),
 		__('wp2Moodle', EMU2_I18N_DOMAIN),
-		'administrator',
-		WP2M_PLUGIN_DIRECTORY.'/wp2m_settings_page.php',
-		'',
-		plugins_url('wp2moodle/icon.png', WP2M_PLUGIN_DIRECTORY) //__FILE__));
+		'manage_options',
+		dirname(__FILE__).'/wp2m_settings_page.php',
+		null,
+		plugin_dir_url(__FILE__).'icon.svg'
 	);
 }
 
@@ -263,7 +262,7 @@ function wp2moodle_generate_hyperlink($cohort,$group,$course,$activity = 0) {
 
 	// needs authentication; ensure userinfo globals are populated
 	global $current_user;
-    get_currentuserinfo();
+    wp_get_current_user();
 
 	$update = get_option('wp2m_update_details') ?: "true";
 
@@ -305,8 +304,7 @@ function wp2m_register_button($buttons) {
    return $buttons;
 }
 function wp2m_add_plugin($plugin_array) {
-	// __FILE__ breaks if wp2moodle is a symlink, so we have to use the defined directory
-   $plugin_array['wp2m'] = plugins_url( 'wp2moodle/wp2m.js', WP2M_PLUGIN_DIRECTORY); // __FILE__ );
+   $plugin_array['wp2m'] = plugin_dir_url(__FILE__).'wp2m.js';
    return $plugin_array;
 }
 
